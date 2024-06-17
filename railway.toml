@@ -1,0 +1,10 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "./Dockerfile"
+watchPatterns = [
+    "requirements.txt", 
+    "src/**", 
+    "railway.toml",
+    "Dockerfile",
+]
+# watchPatterns means that if any of the files in the list changes then rebuild the dockerfile
