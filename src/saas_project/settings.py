@@ -68,7 +68,7 @@ ROOT_URLCONF = 'saas_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "saas_project",BASE_DIR / "saas_project/templates"],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,6 +144,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_BASE_DIR=BASE_DIR / "staticfiles"
+STATICFILES_VENDOR_DIR=STATICFILES_BASE_DIR / "vendors"
+
+# sources for python manage.py collectstatic
+STATICFILES_DIRS=[
+    STATICFILES_BASE_DIR
+]
+
+# output for python manage.py collectstatic
+# local cdn
+STATIC_ROOT=BASE_DIR / "local-cdn"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
