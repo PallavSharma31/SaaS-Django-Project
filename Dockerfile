@@ -43,10 +43,19 @@ COPY ./src /code
 # Install the Python project requirements
 RUN pip install -r /tmp/requirements.txt
 
+# this argument takes the value from the DJANGO_SECRET_KEY variable that we have defined in the railways
+ARG DJANGO_SECRET_KEY
+ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+
+ARG DJANGO_DEBUG=0
+ENV DJANGO_DEBUG=${DJANGO_DEBUG}
 # database isn't available during build
 # run any other commands that do not need the database
 # such as:
-# RUN python manage.py collectstatic --noinput
+RUN python manage.py vendor_pull
+RUN python manage.py collectstatic --noinput
+
+# serving static files using whitenoise,we can use s3 for more complex project
 
 # set the Django default project name
 ARG PROJ_NAME="saas_project"
